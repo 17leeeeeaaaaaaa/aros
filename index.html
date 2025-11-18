@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Joyas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+    header {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+    main {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    .card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    .card h3 {
+      margin: 0;
+      padding: 1rem;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Catálogo de Joyas</h1>
+</header>
+
+<main id="catalog"></main>
+
+  <script>
+    const products = [
+    {"id":"1","productName":"Pendiente Moissanite Halo","images":["public/images/1.jpg"],"precio":'25.000'},
+    {"id":"2","productName":"Pendiente Moissanite 1ct VVS","images":["public/images/2.jpg"],"precio":'20.000'},
+    {"id":"3","productName":"Aro Moissanite 14K","images":["public/images/3.jpg"],"precio":'18.000'},
+    {"id":"4","productName":"Pendiente Moissanite Negro","images":["public/images/4.jpg"],"precio":'18.000'},
+    {"id":"5","productName":"Pendientes Araña Plata","images":["public/images/7.jpg"],"precio":'30.000'},
+    {"id":"6","productName":"Pendientes Mariposa Lujo","images":["public/images/8.jpg"],"precio":'25.000'},
+    {"id":"7","productName":"Pendientes Moissanite ","images":["public/images/9.jpg"],"precio":'25.000'},
+    {"id":"8","productName":"Pendientes Flecha Cruz","images":["public/images/10.png"],"precio":'25.000'},
+    {"id":"9","productName":"Pendientes Salvia Oro","images":["public/images/12.jpg"],"precio":'25.000'},
+    {"id":"10","productName":"Pendientes Punk 18K","images":["public/images/16.jpg"],"precio":'25.000'},
+    {"id":"11","productName":"Pendientes Faraón","images":["public/images/17.jpg"],"precio":'25.000'},
+    {"id":"12","productName":"Aros Decorativos 925","images":["public/images/18.jpg"],"precio":'25.000'},
+    {"id":"13","productName":"Pendientes Raperos","images":["public/images/20.jpg"],"precio":'30.000'},
+    {"id":"14","productName":"Pendientes Boda Moissanite","images":["public/images/22.jpg"],"precio":'25.000'},
+    {"id":"15","productName":"Pendientes Dragón Plata chapado en oro blanco 6,5mm","images":["public/images/23.png"],"precio":'38.000'},
+    {"id":"16","productName":"Pendientes Rayo Moissanite","images":["public/images/24.jpg"],"precio":'15.000'},
+    {"id":"17","productName":"Pendientes Iris Iced","images":["public/images/25.jpg"],"precio":'20.000'},
+    {"id":"18","productName":"Pendientes Hip Hop Cross","images":["public/images/27.jpg"],"precio":'30.000'},
+    {"id":"19","productName":"Pendientes Cruz Cónicos","images":["public/images/28.jpg"],"precio":'25.000'},
+    {"id":"20","productName":"Pendientes Iced Out","images":["public/images/29.jpg"],"precio":'30.000'},
+    {"id":"21","productName":"Pendientes Cruz Popular","images":["public/images/30.jpg"],"precio":'25.000'},
+    {"id":"22","productName":"Pendientes Corazón Fantasma","images":["public/images/32.jpg"],"precio":'27.000'},
+    {"id":"23","productName":"Pendientes Cruz Hombre","images":["public/images/33.jpg"],"precio":'20.000'},
+    {"id":"24","productName":"Pendientes Estrella Seis Puntas","images":["public/images/34.jpg"],"precio":'20.000'},
+    {"id":"25","productName":"Pendientes Estrella 8 Puntas","images":["public/images/35.jpg"],"precio":'28.000'},
+    {"id":"26","productName":"Pendientes Crucifijo Unisex","images":["public/images/36.png"],"precio":'25.000'},
+    {"id":"27","productName":"Pendientes Cruz Lujo","images":["public/images/37.jpg"],"precio":'25.000'},
+    {"id":"28","productName":"Pendientes Cobra Solitaire","images":["public/images/38.png"],"precio":'20.000'},
+    {"id":"29","productName":"Pendientes Serpiente Cruz","images":["public/images/39.jpg"],"precio":'35.000'},
+    {"id":"30","productName":"Pendientes Herradura Doble","images":["public/images/40.jpg"],"precio":'23.000'},
+    {"id":"31","productName":"Pendientes Corona Calavera","images":["public/images/41.jpg"],"precio":'25.000'},
+    {"id":"32","productName":"Pendientes Lily Cut","images":["public/images/42.png"],"precio":'45.000'},
+    {"id":"33","productName":"Pendientes Trébol Azul","images":["public/images/43.png"],"precio":'20.000'},
+    {"id":"34","productName":"Pendientes León Hip Hop","images":["public/images/44.jpg"],"precio":'25.000'},
+    {"id":"35","productName":"Pendientes Cobra Negro","images":["public/images/45.png"],"precio":'40.000'},
+    {"id":"36","productName":"Pendientes Hip Hop VVS","images":["public/images/48.png"],"precio":'25.000'},
+    {"id":"37","productName":"Pendientes Cross Drop","images":["public/images/49.png"],"precio":'30.000'},
+    {"id":"38","productName":"Pendientes Hoop Moissanite","images":["public/images/50.png"],"precio":'30.000'},
+    {"id":"39","productName":"Pendientes Corona Diamond","images":["public/images/52.png"],"precio":'65.000'},
+    {"id":"40","productName":"Pendientes Hip Hop Iced","images":["public/images/53.png"],"precio":'36.000'},
+    {"id":"41","productName":"Pendientes Cruz Estética","images":["public/images/54.png"],"precio":'35.000'},
+    {"id":"42","productName":"Pendientes Flor Marquesa","images":["public/images/55.png"],"precio":'70.000'},
+    {"id":"43","productName":"Pendientes X Shape","images":["public/images/57.png"],"precio":'35.000'},
+    {"id":"44","productName":"Pendientes Ángel Moissanite","images":["public/images/58.png"],"precio":'25.000'},
+    {"id":"45","productName":"Pendientes Cross Iced","images":["public/images/59.png"],"precio":'39.000'},
+    {"id":"46","productName":"Pendientes Pass Diamond","images":["public/images/60.png"],"precio":'35.000'},
+    {"id":"47","productName":"Pendientes Calavera VVS","images":["public/images/61.jpg"],"precio":'20.000'},
+    {"id":"48","productName":"Pendientes Rayo Negro","images":["public/images/62.png"],"precio":'25.000'},
+    {"id":"49","productName":"Pendientes Estrella 4 Puntas","images":["public/images/63.png"],"precio":'25.000'}
+  ];
+
+  const catalog = document.getElementById('catalog');
+
+  products.forEach(product => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <img src="${product.images[0]}" alt="${product.productName}">
+      <h3>${product.productName}</h3>
+      <h5>ID:${product.id}</h5>
+      <p>Precio: $${product.precio}</p>
+    `;
+    catalog.appendChild(card);
+  });
+</script>
+
+</body>
+</html>
